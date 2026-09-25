@@ -300,8 +300,12 @@
   .spell .body{position:relative;flex:1;width:100%;display:grid;align-content:center;text-align:center;font-family:"Caveat",cursive;font-size:1.55rem;line-height:1.28;color:var(--parch-ink);padding:4px 2px}
   .spell .body::before{content:"\201C";position:absolute;left:-6px;top:-18px;font-family:Georgia,serif;font-size:4.2rem;line-height:1;color:rgba(var(--sc),.55)}
   .spell .body .line{display:block}
-  .spell .body .w{display:inline-block;opacity:0;transform:translateY(8px);filter:blur(3px);animation:wordin .45s ease-out forwards}
-  @keyframes wordin{to{opacity:1;transform:none;filter:none}}
+  .spell .body .w{display:inline-block;opacity:0;transform:translateY(8px);animation:wordin .45s ease-out forwards}
+  @keyframes wordin{to{opacity:1;transform:none}}
+  .card3d.flat{transform:none!important;transform-style:flat;transition:none}
+  .card3d.flat .cback{display:none}
+  .card3d.flat .cface{-webkit-backface-visibility:visible;backface-visibility:visible}
+  .card3d.flat .spell{-webkit-font-smoothing:antialiased}
   .spell .holo{position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:overlay;z-index:2;
     background:linear-gradient(115deg,transparent 18%,rgba(255,60,170,.7) 32%,rgba(60,255,255,.7) 44%,rgba(255,240,80,.7) 56%,rgba(120,120,255,.6) 66%,transparent 80%);
     background-size:260% 260%;background-position:calc(50% + var(--px,0)*90%) calc(50% + var(--py,0)*90%);transition:opacity .5s}
@@ -1188,8 +1192,10 @@
     var pips='';for(var i=0;i<sp.r;i++)pips+='<i class="pip pop" style="animation-delay:'+(.5+i*.14)+'s"></i>';
     sPips.innerHTML='Rank '+sp.r+': <span class="pips">'+pips+'</span>';
     restart(spellEl,'reveal');card.classList.add('up');
+    clearTimeout(flatT);flatT=setTimeout(function(){if(card.classList.contains('up'))card.classList.add('flat');},reduce?0:900);
   }
-  function flipDown(cb){if(!card.classList.contains('up')){cb();return;}card.classList.remove('up');setTimeout(cb,reduce?0:430);}
+  var flatT=0;
+  function flipDown(cb){clearTimeout(flatT);if(card.classList.contains('flat')){card.classList.remove('flat');void card.offsetWidth;}if(!card.classList.contains('up')){cb();return;}card.classList.remove('up');setTimeout(cb,reduce?0:430);}
   function reveal(sp,quick,isNew,idx){
     busy=true;var r=sp.r;
     flipDown(function(){
@@ -1241,7 +1247,7 @@
   stack.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();draw1();}});
   card.addEventListener('click',draw1);
   if(!reduce){
-    stage.addEventListener('pointermove',function(e){var r=tiltEl.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    stage.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var r=tiltEl.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
       x=Math.max(-.6,Math.min(.6,x));y=Math.max(-.6,Math.min(.6,y));
       tiltEl.style.setProperty('--rx',(-y*16).toFixed(2)+'deg');tiltEl.style.setProperty('--ry',(x*20).toFixed(2)+'deg');
       spellEl.style.setProperty('--px',x.toFixed(3));spellEl.style.setProperty('--py',y.toFixed(3));});
