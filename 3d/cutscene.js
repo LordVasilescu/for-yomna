@@ -177,9 +177,8 @@ async function init() {
   // after the bow, ease back into standing
   if (mathewRig) mathewRig.mixer.addEventListener('finished', e => { if (mathewRig.clips.bow && e.action.getClip() === mathewRig.clips.bow) playClip('idle', .6); });
 
-  // the Legendary item: a sealed scroll (Tripo model if there is one, otherwise built here)
+  // the Legendary item: a sealed scroll
   async function makeScroll() {
-    try { const m = await loadModel('scroll'); m.scale.multiplyScalar(.55); const g = new THREE.Group(); m.position.y = -.27; g.add(m); return g; } catch (e) {}
     const g = new THREE.Group();
     const paper = new THREE.Mesh(new THREE.CylinderGeometry(.09, .09, .62, 24), new THREE.MeshStandardMaterial({ color: 0xf6ead0, roughness: .8 })); paper.rotation.z = Math.PI / 2; g.add(paper);
     const gold = new THREE.MeshStandardMaterial({ color: 0xe8b64c, metalness: .9, roughness: .28 });
