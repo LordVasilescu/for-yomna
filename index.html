@@ -682,8 +682,45 @@
   }
   @media (max-width:600px){.title .logo{position:static;background:var(--card);padding:18px 18px 20px}.title .logo p{color:var(--text);text-shadow:none}.title .sub{color:var(--soft);text-shadow:none}.title .logo h1{font-size:2.6rem}}
   @media (max-width:480px){.wrap>.hud .pipwrap{display:none}.wrap>.hud{flex-wrap:nowrap}.wrap>.hud .ghost{padding:7px 9px}.tiles{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.quest .rw{display:none}.slot{width:19%}}
+
+  /* ---------- open this first (apology) ---------- */
+  .sorry{z-index:95;background:radial-gradient(ellipse at 50% 30%,#1c1740,#0b0920 70%)!important;padding:16px;backdrop-filter:none!important;transition:opacity .8s}
+  .sorry.bye{opacity:0;pointer-events:none}
+  .sorry .sorry-env{width:min(420px,84vw);animation:sorryIn 1s cubic-bezier(.2,.8,.3,1) both}
+  .sorry .sorry-env .label span{font-size:clamp(1.2rem,3.6vw,1.45rem)}
+  .sorry .sorry-env .seal{width:62px;height:62px;margin:-31px 0 0 -31px}
+  .sorry .sorry-env.gone{opacity:0;transform:translateY(30px) scale(.94);transition:opacity .5s,transform .5s;pointer-events:none}
+  .sorry .sorry-hint{position:absolute;left:0;right:0;bottom:8vh;text-align:center;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;color:rgba(255,240,220,.55);font-size:1.05rem;animation:sorryIn 1s .8s both}
+  .sorry .letter{width:min(560px,calc(100vw - 32px));margin:auto}
+  .sorry .env:focus-visible,.sorry .ok:focus{outline:none}
+  .sorry .ok:focus-visible{outline:2px solid #B8893A;outline-offset:3px}
+  .sorry .letter[hidden]{display:none}
+  .sorry .when span[lang=ar]{font-family:"Lalezar","Cormorant Garamond",serif;font-style:normal}
+  .sorry .letter p:nth-of-type(4){transition-delay:1.35s}.sorry .letter p:nth-of-type(5){transition-delay:1.65s}.sorry .letter p:nth-of-type(6){transition-delay:1.95s}
+  .sorry .letter .sig{transition-delay:2.3s}
+  .sorry .ok{display:block;margin:22px auto 0;padding:10px 30px;border:1px solid rgba(155,107,31,.6);border-radius:999px;background:transparent;color:#6B4416;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.15rem;cursor:pointer;opacity:0;transition:opacity .8s 2.8s,background .2s}
+  .sorry.on .ok{opacity:1}
+  .sorry .ok:hover{background:rgba(184,137,58,.12)}
+  .sorry .spetal{position:absolute;width:12px;height:10px;border-radius:60% 0 60% 0;opacity:0;pointer-events:none}
+  @keyframes sorryIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @media (max-width:760px){.sorry .sorry-env{aspect-ratio:3/2}.sorry .sorry-env .flap{height:46%}.sorry .sorry-env .seal{top:46%}}
 </style>
 
+<div class="letter-veil sorry" id="sorry" hidden role="dialog" aria-modal="true" aria-label="A letter from Mathew">
+  <button class="env sorry-env" type="button" id="sorry-env" aria-label="Open this first"><span class="paper"></span><span class="peek"></span><span class="flap"></span><span class="seal" aria-hidden="true"><i>Y</i><i>Y</i></span><span class="label"><small>open this</small><span>first</span></span></button>
+  <div class="sorry-hint" id="sorry-hint">tap the letter</div>
+  <div class="letter" id="sorry-letter" hidden>
+    <div class="when">I'm sorry<span lang="ar" dir="rtl">أنا آسف</span></div><div class="orn">&#10086;</div>
+    <p>Yomna,</p>
+    <p>I'm sorry for the things I said. You didn't deserve any of it.</p>
+    <p>I got jealous and stuck in my head, and I took it out on you. That's on me, not you.</p>
+    <p>I went quiet because I was ashamed, not because I stopped caring. I didn't.</p>
+    <p>You've been kind to me every day. I want to get better at believing it.</p>
+    <p>You don't have to answer. I just wanted you to know.</p>
+    <div class="sig">Mathew</div>
+    <button class="ok" type="button" id="sorry-ok">Okay</button>
+  </div>
+</div>
 <canvas id="stars"></canvas>
 <div class="wrap">
 
@@ -1603,3 +1640,28 @@
 <script type="module" src="3d/catch.js"></script>
 <script type="module" src="3d/base.js"></script>
 <script type="module" src="3d/lanterns.js"></script>
+<script>
+(function(){
+  var c=document.getElementById('sorry');if(!c)return;
+  var force=/[?&]sorry=1/.test(location.search),seen=false;
+  try{seen=localStorage.getItem('yomna-sorry')==='1';}catch(e){}
+  if(seen&&!force)return;
+  var env=document.getElementById('sorry-env'),hint=document.getElementById('sorry-hint'),L=document.getElementById('sorry-letter'),ok=document.getElementById('sorry-ok');
+  c.hidden=false;document.documentElement.style.overflow='hidden';
+  function tone(f,t,d){try{var a=window.__sorryAC||(window.__sorryAC=new (window.AudioContext||window.webkitAudioContext)());var o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,a.currentTime+t);g.gain.linearRampToValueAtTime(.08,a.currentTime+t+.02);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+t+d);o.connect(g).connect(a.destination);o.start(a.currentTime+t);o.stop(a.currentTime+t+d+.05);}catch(e){}}
+  function petals(){for(var i=0;i<16;i++){var p=document.createElement('span');p.className='spetal';L.appendChild(p);var dx=(Math.random()-.5)*140,rot=Math.random()*360;
+    p.style.left=(8+Math.random()*84)+'%';p.style.top='-8px';p.style.background=['#C8233A','#E0525E','#A3162A'][i%3];
+    p.animate([{opacity:0,transform:'rotate('+rot+'deg)'},{opacity:.9,offset:.15},{opacity:0,transform:'translate('+dx+'px,'+(280+Math.random()*220)+'px) rotate('+(rot+360)+'deg)'}],{duration:2800+Math.random()*1400,delay:300+i*90,fill:'forwards'}).onfinish=function(){this.effect.target.remove();};}}
+  env.addEventListener('click',function(){
+    if(env.classList.contains('opening'))return;
+    env.classList.add('opening');hint.style.opacity=0;[523,659,784].forEach(function(f,i){tone(f,i*.12,1.6);});
+    setTimeout(function(){env.classList.add('gone');},900);
+    setTimeout(function(){env.hidden=true;L.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){c.classList.add('on');petals();});});},1300);
+  });
+  ok.addEventListener('click',function(){
+    try{localStorage.setItem('yomna-sorry','1');}catch(e){}
+    c.classList.add('bye');document.documentElement.style.overflow='';
+    setTimeout(function(){c.hidden=true;},850);
+  });
+})();
+</script>
