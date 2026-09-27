@@ -158,8 +158,9 @@ class Stage {
     const w = this.canvas.clientWidth, h = this.canvas.clientHeight; if (!w || !h) return;
     this.renderer.setSize(w, h, false); this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); this.kick();
   }
-  kick() { if (!this.running) { this.running = true; this.last = performance.now(); requestAnimationFrame(this.frame); } }
+  kick() { if (!this.running && !window.__csOpen) { this.running = true; this.last = performance.now(); requestAnimationFrame(this.frame); } }
   frame = (now) => {
+    if (window.__csOpen) { this.running = false; return; } // the apology cutscene is on screen: stay still
     const dt = Math.min(.05, (now - this.last) / 1000); this.last = now; this.t += dt;
     const t = this.t;
     if (!this.drag) { this.vel *= .94; this.rotY += this.vel + this.auto * dt; }
