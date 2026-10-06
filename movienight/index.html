@@ -332,6 +332,7 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
 #finale .w2{font-family:Amiri,serif;font-size:clamp(26px,4.4vw,44px);color:#ffcf7a;text-shadow:0 2px 10px #000;opacity:0;transition:opacity 1.6s 2.6s;margin-top:4px}
 #finale .w3{font-family:Caveat,cursive;font-size:26px;color:#ffd7de;opacity:0;transition:opacity 1.6s 4s;margin-top:10px}
 #finale.on .w1,#finale.on .w2,#finale.on .w3{opacity:1;transform:none}
+#finale .back.home{left:auto;right:16px;color:#e9c97a}
 #finale .back{position:absolute;bottom:14px;left:16px;font-size:12px;color:#d8c3b0;background:none;border:0;text-decoration:underline;opacity:.8}
 .petal{position:fixed;top:-30px;width:16px;height:12px;border-radius:70% 0 70% 0;background:linear-gradient(135deg,#e0263f,#8a0f22);z-index:21;pointer-events:none;opacity:.9}
 
@@ -671,7 +672,6 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
   </div>
   <div class="car" id="car"></div>
   </div>
-  <div class="addr">9150 W. 21st St. N · Wichita, Kansas</div>
   <div class="welcome">TONIGHT AT THE WARREN<bdi>الليلة في السينما</bdi></div>
   <button class="gbtn walk" id="walk">Go inside</button>
 </section>
@@ -739,7 +739,7 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
       <div class="tkw"><div class="tk big">
         <div class="face">
           <div class="tmain2">
-            <div class="th"><span class="logo">WARREN</span><span class="loc">THEATRES · 21st STREET WARREN WEST</span></div>
+            <div class="th"><span class="logo">WARREN</span><span class="loc">THEATRES · WARREN WEST</span></div>
             <div class="tfilm">READY PLAYER ONE</div>
             <div class="tmeta">PG-13 · 140 MIN · AUD 9 · NO COMMERCIALS</div>
             <div class="tguest"><i>GUEST</i><b>MATHEW</b><bdi>ماثيو</bdi></div>
@@ -754,14 +754,14 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
           </div>
           <div class="tstub2"><div class="adm">ADMIT ONE</div><div class="ss">H28</div><div class="sname">MATHEW</div><div class="mini">THU 10/08</div><div class="bars v"></div></div>
         </div>
-        <div class="back"><div class="bt"><span>WARREN THEATRES · WICHITA, KS</span><span>21st ST</span></div>
+        <div class="back"><div class="bt"><span>WARREN THEATRES</span><span>WEST</span></div>
           <div class="mid"></div>
           <div class="bc"><i></i><span>0001-H28</span></div>
           <div class="fine2">Valid only for date and time shown. No refunds or exchanges. Please keep this ticket until the end of the show.</div></div></div></div>
       <div class="tkw"><div class="tk big">
         <div class="face">
           <div class="tmain2">
-            <div class="th"><span class="logo">WARREN</span><span class="loc">THEATRES · 21st STREET WARREN WEST</span></div>
+            <div class="th"><span class="logo">WARREN</span><span class="loc">THEATRES · WARREN WEST</span></div>
             <div class="tfilm">READY PLAYER ONE</div>
             <div class="tmeta">PG-13 · 140 MIN · AUD 9 · NO COMMERCIALS</div>
             <div class="tguest"><i>GUEST</i><b>YOMNA</b><bdi>يُمنى</bdi></div>
@@ -776,7 +776,7 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
           </div>
           <div class="tstub2"><div class="adm">ADMIT ONE</div><div class="ss">H29</div><div class="sname">YOMNA</div><div class="mini">THU 10/08</div><div class="bars v"></div></div>
         </div>
-        <div class="back"><div class="bt"><span>WARREN THEATRES · WICHITA, KS</span><span>21st ST</span></div>
+        <div class="back"><div class="bt"><span>WARREN THEATRES</span><span>WEST</span></div>
           <div class="mid"></div>
           <div class="bc"><i></i><span>0001-H29</span></div>
           <div class="fine2">Valid only for date and time shown. No refunds or exchanges. Please keep this ticket until the end of the show.</div>
@@ -794,7 +794,7 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
     </div>
 
     <button class="gbtn seatsbtn" id="seats">Find our seats</button>
-    <footer>من صنع ماثيو · <a class="homelink" href="../">back to your page</a></footer>
+    <footer>من صنع ماثيو · <a class="homelink" href="../?from=movie" onclick="movieDone()">back to your page</a></footer>
   </div>
   <div class="carpet"></div>
 </section>
@@ -847,6 +847,7 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
   <div class="veil"></div>
   <div class="words"><div class="w1">See you Thursday.</div><div class="w2">أشوفك الخميس</div><div class="w3">your seat's saved, right next to mine</div></div>
   <button class="back" id="finBack">back to the theater</button>
+  <a class="back home" href="../?from=movie" onclick="movieDone()">your page ›</a>
 </section>
 <div class="toast" id="toast"></div>
 <div class="tipbar" id="tipbar"></div>
@@ -1179,6 +1180,8 @@ function lobbyAmb(on){ lobbyNodes.forEach(n=>{try{n.stop()}catch(e){}}); lobbyNo
   pop();
 }
 
+/* the website opens here until she's been through movie night once */
+function movieDone(){ try{ localStorage.setItem('yomna-movie-done','1'); localStorage.setItem('yomna-movie','1'); }catch(e){} }
 /* ---------- tap hints ---------- */
 function addDots(list){ list.forEach(([id,pos])=>{ const el=document.getElementById(id); if(!el||el.querySelector(':scope > .tapdot')) return;
   const d=document.createElement('i'); d.className='tapdot'; if(pos){ d.style.left=pos[0]; d.style.top=pos[1]; } el.appendChild(d);
@@ -1258,7 +1261,7 @@ function petals(n=26){ for(let i=0;i<n;i++){ const p=document.createElement('div
   const dx=(Math.random()-.5)*240, rot=Math.random()*720-360, dur=7000+Math.random()*5000;
   p.animate([{transform:'translate(0,0) rotate(0)',opacity:0},{opacity:.95,offset:.1},{transform:`translate(${dx}px,${innerHeight+60}px) rotate(${rot}deg)`,opacity:.8}],{duration:dur,delay:Math.random()*4000,easing:'ease-in'}).onfinish=()=>p.remove(); } }
 function musicBox(){ const n=[523.25,659.25,783.99,1046.5,987.77,783.99,659.25,783.99,880,783.99,659.25,523.25]; chime(n,.42,.06); setTimeout(()=>chime([1046.5,1318.5],.6,.05),n.length*420+300); }
-document.querySelector('.rose').addEventListener('click',()=>{ document.getElementById('finale').classList.add('on'); document.getElementById('rosehint').classList.remove('on'); petals(); if(AC&&soundOn) musicBox(); });
+document.querySelector('.rose').addEventListener('click',()=>{ movieDone(); document.getElementById('finale').classList.add('on'); document.getElementById('rosehint').classList.remove('on'); petals(); if(AC&&soundOn) musicBox(); });
 document.getElementById('finBack').onclick=()=>document.getElementById('finale').classList.remove('on');
 
 /* ---------- projector beam with floating dust ---------- */

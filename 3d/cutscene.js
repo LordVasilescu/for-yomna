@@ -392,6 +392,6 @@ async function init() {
   let seen = false; try { seen = localStorage.getItem(KEY) === '1'; } catch (e) {}
   const force = /[?&]cs=1/.test(location.search);
   const gb = gate.querySelector('.btn'); if (gb.dataset.label) gb.innerHTML = gb.dataset.label; gb.disabled = false;
-  if (!seen || force) { window.__csOpen = true; reset(); setCam(V(6, 9, 14), V(20, 20, -120)); root.hidden = false; gate.hidden = false; document.documentElement.style.overflow = 'hidden'; requestAnimationFrame(() => { root.classList.add('on'); gate.classList.add('on'); }); kick(); }
+  if (force) { window.__csOpen = true; /* no longer autoplays: the site opens on Movie Night now */ reset(); setCam(V(6, 9, 14), V(20, 20, -120)); root.hidden = false; gate.hidden = false; document.documentElement.style.overflow = 'hidden'; requestAnimationFrame(() => { root.classList.add('on'); gate.classList.add('on'); }); kick(); }
   window.YCSReady && window.YCSReady();
 }

@@ -3,6 +3,10 @@
 <meta name="author" content="Mathew">
 <meta name="copyright" content="© 2026 Mathew. All rights reserved.">
 <meta charset="utf-8">
+<script>
+/* the website opens on Movie Night until she has been through it (?home=1 skips, ?movie=1 forces) */
+(function(){try{var q=location.search;if(/[?&]movie=1/.test(q)||(!/[?&](home|from)=/.test(q)&&localStorage.getItem('yomna-movie-done')!=='1'))location.replace('movienight/');}catch(e){}})();
+</script>
 <link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1810,11 +1814,11 @@
   ibtn.addEventListener('click',toggleCard);item.querySelector('.cs-item-tag').addEventListener('click',toggleCard);
   card.addEventListener('click',function(e){var a=e.target.getAttribute('data-a');if(!a)return;card.hidden=true;if(a==='watch'&&window.YCS)window.YCS.play();else window.YSorryRead();});
   document.addEventListener('click',function(e){if(!item.contains(e.target))card.hidden=true;});
-  window.YCSReady=function(){if(seen()&&!force)showItem(false);};
-  window.YSorryFallback=function(){var cs=document.getElementById('cs');cs.hidden=true;window.__csOpen=false;cs.classList.remove('on');if(!seen()||force)envelope();else showItem(false);};
+  window.YCSReady=function(){if(!force)showItem(false);};
+  window.YSorryFallback=function(){var cs=document.getElementById('cs');cs.hidden=true;window.__csOpen=false;cs.classList.remove('on');if(force)envelope();else showItem(false);};
   /* first visit: put the "new message" card up right away, the 3D scene finishes loading behind it */
   var gl=false;try{var t=document.createElement('canvas');gl=!!(t.getContext('webgl2')||t.getContext('webgl'));}catch(e){}
-  if(gl&&(!seen()||force)){var cs=document.getElementById('cs'),gate=cs.querySelector('.cs-gate'),gb=gate.querySelector('.btn');
+  if(gl&&force){var cs=document.getElementById('cs'),gate=cs.querySelector('.cs-gate'),gb=gate.querySelector('.btn');
     gb.disabled=true;gb.dataset.label=gb.innerHTML;gb.textContent='Loading…';cs.hidden=false;gate.hidden=false;document.documentElement.style.overflow='hidden';
     requestAnimationFrame(function(){cs.classList.add('on');gate.classList.add('on');});
     setTimeout(function(){if(!window.YCS&&!cs.hidden)window.YSorryFallback();},45000);}
