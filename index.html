@@ -1769,7 +1769,9 @@
   var it=document.getElementById('mv-item');if(!it)return;
   var card=it.querySelector('.cs-item-card'),KEY='yomna-movie';
   function seen(){try{return localStorage.getItem(KEY)==='1';}catch(e){return false;}}
+  var done=false;try{done=localStorage.getItem('yomna-movie-done')==='1';}catch(e){}
   if(seen())it.classList.add('seen');else{it.classList.add('pop');}
+  if(done){it.querySelector('[data-a=go]').textContent='Watch it again 🎟';it.querySelector('.cs-item-tag small').textContent='tap to watch again';}
   function toggle(e){e.stopPropagation();card.hidden=!card.hidden;}
   it.querySelector('.cs-item-btn').addEventListener('click',toggle);it.querySelector('.cs-item-tag').addEventListener('click',toggle);
   card.addEventListener('click',function(e){if(e.target.getAttribute('data-a')!=='go')return;try{localStorage.setItem(KEY,'1');}catch(_){}location.href='movienight/';});

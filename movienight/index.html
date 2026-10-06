@@ -332,7 +332,12 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
 #finale .w2{font-family:Amiri,serif;font-size:clamp(26px,4.4vw,44px);color:#ffcf7a;text-shadow:0 2px 10px #000;opacity:0;transition:opacity 1.6s 2.6s;margin-top:4px}
 #finale .w3{font-family:Caveat,cursive;font-size:26px;color:#ffd7de;opacity:0;transition:opacity 1.6s 4s;margin-top:10px}
 #finale.on .w1,#finale.on .w2,#finale.on .w3{opacity:1;transform:none}
-#finale .back.home{left:auto;right:16px;color:#e9c97a}
+#finale .finend{position:absolute;left:0;right:0;bottom:9%;text-align:center;opacity:0;transform:translateY(10px);transition:opacity 1.4s 5.6s,transform 1.4s 5.6s;z-index:2}
+#finale.on .finend{opacity:1;transform:none}
+#finale .finhome{display:inline-block;text-decoration:none;font-size:18px;padding:14px 30px;box-shadow:0 0 30px rgba(233,201,122,.45),0 4px 0 #6b4f1c}
+#finale .finsub{margin-top:12px;font-size:13px;color:#e9d6c0;text-shadow:0 1px 4px #000}
+#finale .finsub bdi{font-family:Amiri,serif;font-size:16px;color:#ffcf7a}
+#finale .finsub a{color:#ffd7de}
 #finale .back{position:absolute;bottom:14px;left:16px;font-size:12px;color:#d8c3b0;background:none;border:0;text-decoration:underline;opacity:.8}
 .petal{position:fixed;top:-30px;width:16px;height:12px;border-radius:70% 0 70% 0;background:linear-gradient(135deg,#e0263f,#8a0f22);z-index:21;pointer-events:none;opacity:.9}
 
@@ -847,7 +852,10 @@ footer{text-align:center;font-size:12px;color:#a7948a;margin-top:16px;position:r
   <div class="veil"></div>
   <div class="words"><div class="w1">See you Thursday.</div><div class="w2">أشوفك الخميس</div><div class="w3">your seat's saved, right next to mine</div></div>
   <button class="back" id="finBack">back to the theater</button>
-  <a class="back home" href="../?from=movie" onclick="movieDone()">your page ›</a>
+  <div class="finend">
+    <a class="gbtn finhome" href="../?from=movie" onclick="movieDone()">Back to your page</a>
+    <div class="finsub"><bdi>ارجعي لصفحتك</bdi> · <a href="./" onclick="movieDone()">watch it all again</a></div>
+  </div>
 </section>
 <div class="toast" id="toast"></div>
 <div class="tipbar" id="tipbar"></div>
