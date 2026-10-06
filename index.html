@@ -774,6 +774,14 @@
   .cs-item-card button{flex:1;font:inherit;font-family:"Fredoka",sans-serif;font-weight:600;font-size:.88rem;padding:8px 6px;border-radius:999px;cursor:pointer;border:1px solid rgba(242,196,109,.5);background:rgba(255,255,255,.06);color:#fff}
   .cs-item-card button:hover{background:rgba(242,196,109,.18)}
   @media (max-width:600px){.cs-dlg{gap:12px;padding:12px 18px 18px 12px}.cs-name{font-size:1.05rem}.cs-leg{top:5vh}}
+  .mv-item{bottom:calc(94px + env(safe-area-inset-bottom,0px))}
+  .cs-item[hidden]+.mv-item{bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  .mv-item .cs-item-btn{background:radial-gradient(circle at 40% 35%,#7a1e2c,#3a0a16)}
+  .mv-item .cs-item-tag{background:linear-gradient(90deg,rgba(58,10,22,.95),rgba(110,24,40,.92))}
+  .mv-item .cs-item-card{background:linear-gradient(180deg,#5a1424,#2a0812)}
+  .mv-item .new{display:inline-block;margin-right:6px;padding:0 6px;border-radius:999px;background:#E0525E;color:#fff;font-family:"Fredoka",sans-serif;font-size:.6rem;letter-spacing:.1em;vertical-align:2px}
+  .mv-item.seen .new{display:none}
+  .mv-item .cs-item-card p{font-family:"Fredoka",sans-serif;font-size:.82rem;line-height:1.35;color:#ffe9ec;margin:4px 0 0}
   @media (prefers-reduced-motion:reduce){.cs-item-btn,.cs-item-btn img,.cs-mail-ic,.cs-mail .btn,.cs-next{animation:none}}
 </style>
 
@@ -823,6 +831,15 @@
   </div>
   <button class="cs-item-btn" type="button" aria-label="Letter from Mathew, tap to replay"><img alt=""><span aria-hidden="true">&#128220;</span></button>
   <button class="cs-item-tag" type="button" tabindex="-1" aria-hidden="true"><b>Letter from Mathew</b><small>tap to replay</small></button>
+</div>
+<div class="cs-item mv-item has-img" id="mv-item">
+  <div class="cs-item-card" hidden>
+    <b>Movie Night</b><small>Legendary item · for two</small>
+    <p>Ready Player One, Thursday. Your seat is saved next to mine.</p>
+    <div><button type="button" data-a="go">Go inside 🎟</button></div>
+  </div>
+  <button class="cs-item-btn" type="button" aria-label="Movie Night tickets, tap to open"><img alt="" src="img/mn_tkicon.png"><span aria-hidden="true">&#127903;</span></button>
+  <button class="cs-item-tag" type="button" tabindex="-1" aria-hidden="true"><b><span class="new">NEW</span>Movie Night</b><small>tap to open</small></button>
 </div>
 <canvas id="stars"></canvas>
 <div class="wrap">
@@ -1742,6 +1759,19 @@
 <script type="module" src="3d/engine.js"></script>
 <script type="module" src="3d/catch.js"></script>
 <script type="module" src="3d/base.js"></script>
+<script>
+/* Movie Night item: two golden tickets she can tap any time to go back to the theater */
+(function(){
+  var it=document.getElementById('mv-item');if(!it)return;
+  var card=it.querySelector('.cs-item-card'),KEY='yomna-movie';
+  function seen(){try{return localStorage.getItem(KEY)==='1';}catch(e){return false;}}
+  if(seen())it.classList.add('seen');else{it.classList.add('pop');}
+  function toggle(e){e.stopPropagation();card.hidden=!card.hidden;}
+  it.querySelector('.cs-item-btn').addEventListener('click',toggle);it.querySelector('.cs-item-tag').addEventListener('click',toggle);
+  card.addEventListener('click',function(e){if(e.target.getAttribute('data-a')!=='go')return;try{localStorage.setItem(KEY,'1');}catch(_){}location.href='movienight/';});
+  document.addEventListener('click',function(e){if(!it.contains(e.target))card.hidden=true;});
+})();
+</script>
 <script type="module" src="3d/lanterns.js"></script>
 <script type="module" src="3d/cutscene.js"></script>
 <script>
