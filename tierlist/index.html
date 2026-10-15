@@ -1,0 +1,495 @@
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
+<title>Spiral Tier List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Macondo&family=Fredoka:wght@400;500;600;700&display=swap">
+<style>
+:root{--img:none;
+  --night:#0f0d26;--panel:#1b1844;--panel2:#26225c;--line:#3c3787;
+  --text:#f4efff;--muted:#aaa3dc;--gold:#f5c451;--gold2:#ffe39a;--ink:#1a1033;
+  --ice:#8fe3ff;--ice2:#3aa7d6;--me:var(--gold);--them:var(--ice);
+  --S:#ffb547;--A:#c58cff;--B:#6fdc9b;--C:#73c7f5;--D:#ff8a6b;--F:#a19ebd;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--night)}
+body{color:var(--text);font-family:"Fredoka",ui-rounded,system-ui,sans-serif;font-size:15px;line-height:1.45;-webkit-tap-highlight-color:transparent}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding-inline:16px;padding-block:28px 120px;display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-family:"Macondo","Papyrus",fantasy;font-weight:400;font-size:clamp(38px,7vw,64px);line-height:1;margin:0;text-wrap:balance;
+  background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,#d9892b);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+h2{font-family:"Macondo","Papyrus",fantasy;font-weight:400;font-size:28px;margin:0;color:var(--gold2);text-wrap:balance}
+h3{margin:0;font-size:16px;font-weight:600}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.back{justify-self:start;color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}.back:hover{color:var(--ice);border-color:var(--ice)}
+.sendbox{background:var(--panel);border:1px solid var(--ice);border-radius:16px;padding:14px;display:grid;gap:10px}
+.who{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.who img{width:22px;height:22px;border-radius:50%;vertical-align:middle}
+
+nav{display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px;width:max-content;max-width:100%;overflow-x:auto;position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+nav button{all:unset;cursor:pointer;padding:8px 16px;border-radius:999px;font-weight:600;color:var(--muted);white-space:nowrap}
+nav button[aria-selected="true"]{background:var(--gold);color:var(--ink)}
+nav button:focus-visible,.btn:focus-visible,.world:focus-visible,.chip:focus-visible,.pick:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:12px;font-weight:600;background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+.btn:hover{border-color:var(--gold)}
+.btn.gold{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn.small{padding:6px 12px;font-size:13px}
+.btn.danger{color:#ffb4a3}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.note{font-size:13px;color:var(--muted)}
+.save{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* tier board */
+.board{display:grid;gap:6px;background:rgba(10,8,30,.55);border:1px solid var(--line);border-radius:18px;padding:8px}
+.tier{display:grid;grid-template-columns:118px 1fr;min-height:104px;border-radius:12px;overflow:hidden;background:var(--panel)}
+.tlabel{background:var(--tc);color:var(--ink);display:grid;align-content:center;justify-items:center;text-align:center;padding:6px;gap:0;cursor:pointer;user-select:none}
+.tlabel b{font-family:"Macondo",fantasy;font-weight:400;font-size:34px;line-height:1}
+.tlabel span{font-size:12px;font-weight:700;letter-spacing:.02em}
+.tlabel small{font-size:10.5px;line-height:1.2;opacity:.8}
+.drop{display:flex;flex-wrap:wrap;gap:6px;padding:8px;align-content:flex-start;min-height:104px;transition:background .15s}
+.holding .drop{background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(245,196,81,.05) 10px 20px);cursor:copy}
+.drop.over{background:rgba(245,196,81,.14)!important}
+.tray{background:var(--panel);border:1px dashed var(--line);border-radius:18px}
+.tray .drop{min-height:108px}
+.trayhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px 0;flex-wrap:wrap}
+
+.world{all:unset;box-sizing:border-box;cursor:grab;position:relative;width:132px;height:88px;border-radius:10px;padding:6px 8px;display:grid;align-content:end;
+  background:var(--img) center/cover no-repeat,linear-gradient(140deg,var(--c1),var(--c2));color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 3px 0 rgba(0,0,0,.35);
+  transition:transform .15s,box-shadow .15s;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.world::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,transparent 40%,rgba(10,6,30,.85));pointer-events:none}
+.world .mono{font-family:"Macondo",fantasy;font-size:22px;line-height:1;opacity:.92;text-shadow:0 2px 0 rgba(0,0,0,.3);position:relative;z-index:1}
+.world .wn{font-size:13px;font-weight:600;line-height:1.1;position:relative;z-index:1;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.world .side{position:absolute;top:5px;right:6px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.35);padding:1px 5px;border-radius:6px;z-index:1}
+.world:hover{transform:translateY(-2px)}
+.world.held{transform:translateY(-4px) scale(1.06);box-shadow:0 0 0 3px var(--gold),0 0 22px 4px rgba(245,196,81,.55);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 3px var(--gold2),0 0 30px 8px rgba(245,196,81,.35)}}
+.world.pop{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.7)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+.world .avg{position:absolute;top:5px;right:6px;z-index:1;font-size:11px;font-weight:700;background:rgba(0,0,0,.4);padding:1px 6px;border-radius:6px;font-variant-numeric:tabular-nums}
+
+.hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:10;background:var(--gold);color:var(--ink);font-weight:600;padding:10px 18px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:calc(100% - 32px);text-align:center}
+
+/* awards */
+.awards{display:grid;gap:12px}
+.award{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px}
+.award header{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.award .q{color:var(--muted);font-size:13px}
+.picks{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.pick{all:unset;cursor:pointer;flex:none;display:inline-flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:999px;font-size:13px;font-weight:600;background:var(--panel2);border:1px solid var(--line);white-space:nowrap}
+.pick::before{content:"";width:30px;height:22px;border-radius:999px;background:var(--img) center/cover}
+.pick[aria-pressed="true"]{background:linear-gradient(140deg,var(--c1),var(--c2));border-color:var(--gold);box-shadow:0 0 0 2px var(--gold);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+
+input[type=text],textarea{font:inherit;color:var(--text);background:var(--night);border:1px solid var(--line);border-radius:10px;padding:9px 12px;width:100%;max-width:100%}
+textarea{min-height:70px;resize:vertical;font-size:12px}
+
+
+/* duo header */
+.duo{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+.wiz{margin:0;display:grid;justify-items:center;gap:6px;text-align:center}
+.wiz .ring{position:relative;width:112px;height:112px;border-radius:50%;padding:4px;background:conic-gradient(from 200deg,var(--wc),transparent 40%,var(--wc) 70%,transparent)}
+.wiz .ring img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--night)}
+.wiz .ring::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px dashed color-mix(in srgb,var(--wc) 60%,transparent);animation:ringspin 18s linear infinite}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+.wiz.ice{--wc:var(--ice)}.wiz.gold{--wc:var(--gold)}
+.wiz figcaption{font-weight:600;font-size:14px;line-height:1.15}
+.wiz figcaption small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--wc);font-weight:600;margin-top:2px}
+.wiz.you .ring::after{content:"You";position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);background:var(--wc);color:var(--ink);font-size:11px;font-weight:700;padding:1px 9px;border-radius:999px}
+.titleblock{display:grid;gap:8px;justify-items:center;text-align:center}
+.braid{height:3px;width:min(320px,80%);border-radius:3px;background:linear-gradient(90deg,var(--ice),#fff 50%,var(--gold));box-shadow:0 0 14px rgba(143,227,255,.5),0 0 14px rgba(245,196,81,.4)}
+.duo .lede{text-align:center}
+@media (max-width:640px){
+  .duo{grid-template-columns:1fr 1fr;row-gap:14px}
+  .titleblock{grid-column:1/-1;grid-row:1}
+  .wiz .ring{width:84px;height:84px}
+}
+.sound{all:unset;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);padding:6px 12px;border-radius:999px;border:1px solid var(--line)}
+.sound[aria-pressed="true"]{color:var(--me);border-color:var(--me)}
+.sound:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.world.held{box-shadow:0 0 0 3px var(--me),0 0 22px 4px color-mix(in srgb,var(--me) 55%,transparent)}
+.world .match{position:absolute;top:5px;left:6px;z-index:1;width:14px;height:14px;border-radius:50%;background:conic-gradient(var(--ice) 0 50%,var(--gold) 0);box-shadow:0 0 8px #fff;animation:matchp 2.4s ease-in-out infinite}
+@keyframes matchp{50%{box-shadow:0 0 14px 2px #fff}}
+.spark{position:fixed;width:7px;height:7px;border-radius:50%;pointer-events:none;z-index:20;background:var(--c);box-shadow:0 0 8px var(--c);animation:spark .8s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+.toast{position:fixed;left:50%;top:calc(18px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:30;background:var(--panel2);border:1px solid var(--me);color:var(--text);padding:10px 18px;border-radius:999px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:toast 3.2s ease forwards;max-width:calc(100% - 32px);text-align:center}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-10px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+
+/* our lists */
+.us{display:grid;gap:14px}
+.sync{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}
+.dial{--p:0;width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--ice),var(--gold) calc(var(--p)*1%),var(--panel2) 0)}
+.dial div{width:104px;height:104px;border-radius:50%;background:var(--night);display:grid;place-items:center;align-content:center}
+.dial b{font-family:"Macondo",fantasy;font-weight:400;font-size:38px;line-height:1;color:var(--gold2);font-variant-numeric:tabular-nums}
+.dial span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sync h2{margin-bottom:4px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;align-content:start}
+.col h3,.full h3{font-family:"Macondo",fantasy;font-weight:400;font-size:21px;color:var(--gold2)}
+.col .note{margin:-6px 0 0}
+.stack{display:grid;gap:8px}
+.vrow{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:center}
+.vrow.text{grid-template-columns:1fr}
+.th{width:54px;height:36px;border-radius:8px;background:var(--img) center/cover,linear-gradient(140deg,var(--c1),var(--c2))}
+.vrow strong{font-size:14px;font-weight:600;line-height:1.2}
+.pair{display:flex;gap:4px;align-items:center}
+.tb{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 5px;border-radius:6px;background:var(--tc,var(--panel2));color:var(--ink);font-size:12px;font-weight:700;position:relative}
+.tb.none{background:var(--panel2);color:var(--muted)}
+.tb::after{content:"";position:absolute;left:4px;right:4px;bottom:-5px;height:2px;border-radius:2px;background:var(--who)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px;background:var(--who)}
+.waiting{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:var(--panel);border:1px dashed var(--line);border-radius:18px;padding:16px}
+.waiting img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--them)}
+.full{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px}
+.vrow.same strong::after{content:"";display:inline-block;width:10px;height:10px;margin-left:8px;border-radius:50%;background:conic-gradient(var(--ice) 0 50%,var(--gold) 0);vertical-align:middle}
+@media (max-width:480px){.sync{grid-template-columns:1fr;justify-items:center;text-align:center}}
+
+@media (max-width:560px){
+  .tier{grid-template-columns:78px 1fr}
+  .tlabel b{font-size:28px}.tlabel small{display:none}
+  .world{width:calc((100% - 6px)/2);min-width:0;height:78px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="wrap">
+  <a class="back" href="../">&larr; back to your page</a>
+  <header class="duo">
+    <figure class="wiz ice" id="wizYomna"><div class="ring"><img src="img/maria.jpg" alt="Maria, Yomna's Ice wizard"></div><figcaption>Maria<small>Ice &middot; Yomna</small></figcaption></figure>
+    <div class="titleblock">
+      <div class="eyebrow">Maria &amp; Mathew Gold Eyes</div>
+      <h1>Spiral Tier List</h1>
+      <div class="braid" aria-hidden="true"></div>
+      <p class="lede">Two wizards rank every world in the Spiral, from Legendary down to &ldquo;skip it with an elixir.&rdquo; Then see where you agree.</p>
+      <div class="who" id="who"></div>
+    </div>
+    <figure class="wiz gold" id="wizMathew"><div class="ring"><img src="img/mathew.jpg" alt="Mathew Gold Eyes, Mathew's Balance wizard"></div><figcaption>Mathew Gold Eyes<small>Balance &middot; Mathew</small></figcaption></figure>
+  </header>
+
+  <nav role="tablist" aria-label="Sections">
+    <button role="tab" id="tab-rank" aria-selected="true" data-tab="rank">Rank worlds</button>
+    <button role="tab" id="tab-awards" aria-selected="false" data-tab="awards">Awards</button>
+    <button role="tab" id="tab-us" aria-selected="false" data-tab="us">Our lists</button>
+  </nav>
+
+  <section id="view-rank" role="tabpanel" style="display:grid;gap:14px">
+    <div class="row" style="justify-content:space-between">
+      <p class="note" style="margin:0">Tap a world, then tap a tier. On a computer you can also drag.</p>
+      <div class="row"><span class="save" id="save1"></span><button class="sound" id="soundBtn" type="button" aria-pressed="true">Sound on</button></div>
+    </div>
+    <div class="board" id="board"></div>
+    <div class="tray" id="trayWrap">
+      <div class="trayhead"><h3 id="trayTitle">Unranked worlds</h3>
+        <div class="row"><button class="btn small gold" id="sendBtn">Send my picks to Mathew</button><button class="btn small" id="copyText">Copy list for Discord</button><button class="btn small danger" id="reset">Clear my list</button></div>
+      </div>
+      <div class="drop" data-tier="" id="tray"></div>
+    </div>
+  </section>
+
+  <section id="view-awards" role="tabpanel" hidden style="display:grid;gap:14px">
+    <div class="row" style="justify-content:space-between"><p class="note" style="margin:0">One world per award. Tap again to unpick.</p><span class="save" id="save2"></span></div>
+    <div class="awards" id="awards"></div>
+  </section>
+
+  <section id="view-us" role="tabpanel" hidden class="us">
+    <div class="sync">
+      <div class="dial" id="dial"><div><b id="syncPct">&ndash;</b><span>spell sync</span></div></div>
+      <div><h2 id="syncTitle">How in sync are you?</h2><p class="note" style="margin:0" id="syncLine">Rank some worlds, both of you, and your sync score shows up here.</p></div>
+    </div>
+    <div class="waiting" id="waiting" hidden><img id="waitImg" src="img/maria.jpg" alt=""><div><h3 id="waitTitle">Waiting for Yomna's list</h3><p class="note" style="margin:0" id="waitLine">Once she ranks a few worlds, your two lists line up here.</p></div></div>
+    <div class="legend" id="legend"></div>
+    <div class="cols">
+      <div class="col"><h3>We both love</h3><p class="note">You both put these in S or A.</p><div id="bothLove" class="stack"></div></div>
+      <div class="col"><h3>Debate night</h3><p class="note">Two or more tiers apart. Settle it in game.</p><div id="debate" class="stack"></div></div>
+      <div class="col"><h3>Award picks</h3><p class="note">Matching picks get the ice and gold dot.</p><div id="awardPair" class="stack"></div></div>
+    </div>
+    <div class="full"><h3>Every world, side by side</h3><div id="fullList" class="stack"></div></div>
+  </section>
+  <textarea id="fallbackCopy" readonly hidden></textarea>
+</div>
+<div class="hint" id="hint" hidden></div>
+
+<script>
+const WORLDS=[
+ {id:"wc",name:"Wizard City",mono:"WC",c1:"#2f6fd6",c2:"#7fd1ff",tag:"Ravenwood, Unicorn Way, Gamma"},
+ {id:"kt",name:"Krokotopia",mono:"Kt",c1:"#8a5a1c",c2:"#e6b24f",tag:"Pyramids and the Krokosphinx"},
+ {id:"mb",name:"Marleybone",mono:"Mb",c1:"#4a5266",c2:"#b08a5a",tag:"Foggy streets, Meowiarty"},
+ {id:"ms",name:"MooShu",mono:"MS",c1:"#c8324a",c2:"#f7a24f",tag:"Samoorai and the Jade Palace"},
+ {id:"ds",name:"Dragonspyre",mono:"Ds",c1:"#6e1515",c2:"#ff6a2b",tag:"Malistaire's last stand"},
+ {id:"gh",name:"Grizzleheim",mono:"Gh",c1:"#5e4c38",c2:"#9fb6c8",tag:"Bears, ravens, Wintertusk",side:1},
+ {id:"ws",name:"Wysteria",mono:"Wy",c1:"#5b2f8c",c2:"#e9b949",tag:"Pigswick Academy",side:1},
+ {id:"ce",name:"Celestia",mono:"Ce",c1:"#14707f",c2:"#8fe3d6",tag:"Sunken city of the stars"},
+ {id:"za",name:"Zafaria",mono:"Za",c1:"#9c6b1e",c2:"#5f8f33",tag:"Savanna and Zamunda"},
+ {id:"av",name:"Avalon",mono:"Av",c1:"#1f6a43",c2:"#c4d469",tag:"Knights, Wyrd, the Lady"},
+ {id:"az",name:"Azteca",mono:"Az",c1:"#145a4a",c2:"#e0ae37",tag:"Dinosaurs and Xibalba"},
+ {id:"kh",name:"Khrysalis",mono:"Kh",c1:"#4b2370",c2:"#e29ad2",tag:"Morganthe's moth kingdom"},
+ {id:"dm",name:"Darkmoor",mono:"Dm",c1:"#241a2e",c2:"#8a5a8f",tag:"Shane von Shane's castle",side:1},
+ {id:"po",name:"Polaris",mono:"Po",c1:"#4f78a8",c2:"#bcd8f0",tag:"Penguin revolution"},
+ {id:"mi",name:"Mirage",mono:"Mi",c1:"#b8602a",c2:"#f2d38a",tag:"Desert sands of time"},
+ {id:"em",name:"Empyrea",mono:"Em",c1:"#2f4f96",c2:"#e7a74a",tag:"Airships and the Ship of Fools"},
+ {id:"ka",name:"Karamelle",mono:"Ka",c1:"#e9558f",c2:"#ffcf6b",tag:"Candy world of sweets"},
+ {id:"le",name:"Lemuria",mono:"Le",c1:"#1d8a58",c2:"#b6f28e",tag:"Ancient forest of the first world"},
+ {id:"no",name:"Novus",mono:"No",c1:"#7a2b3b",c2:"#d8c08a",tag:"La Ville Rose and New Vicorgia"},
+ {id:"wa",name:"Wallaru",mono:"Wa",c1:"#a8461f",c2:"#f0b35a",tag:"Outback and the Dreaming"},
+ {id:"se",name:"Selenopolis",mono:"Se",c1:"#2e3170",c2:"#c9c7ff",tag:"The city on the moon"},
+ {id:"aq",name:"Aquila",mono:"Aq",c1:"#3d6bb0",c2:"#efe2c0",tag:"Olympus, Atlantea, Troy",side:1},
+];
+const W=Object.fromEntries(WORLDS.map(w=>[w.id,w]));
+const TIERS=[
+ {k:"S",name:"Legendary",sub:"Would quest here forever"},
+ {k:"A",name:"Grandmaster",sub:"Peak Spiral"},
+ {k:"B",name:"Master",sub:"Solid adventure"},
+ {k:"C",name:"Adept",sub:"It's fine, Gamma"},
+ {k:"D",name:"Apprentice",sub:"Too many defeat quests"},
+ {k:"F",name:"Skip it",sub:"Buy the world elixir"},
+];
+const SCORE={S:6,A:5,B:4,C:3,D:2,F:1};
+const AWARDS=[
+ {id:"music",name:"Best soundtrack",q:"Which world's music lives in your head?"},
+ {id:"story",name:"Best story",q:"The arc that actually got you."},
+ {id:"pretty",name:"Most beautiful",q:"Screenshot-every-corner world."},
+ {id:"grind",name:"Worst quest grind",q:"Defeat 12 more. Collect 8 more."},
+ {id:"boss",name:"Hardest bosses",q:"Where you burned the most potions."},
+ {id:"home",name:"Would move here",q:"Where your castle would go."},
+];
+
+// ---------- state ----------
+let mine={t:{},a:{}};
+let held=null, tab="rank", db=null, user=null, myId=null, canWrite=true, adopted=false;
+let votes=[], other=null, iAmMathew=true;
+const ls={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const MINE_KEY=/[?&]me=mathew/.test(location.search)||/[#&]y=/.test(location.hash)&&!/[?&]me=yomna/.test(location.search)?"stl-mathew":"stl-mine";
+{const m=ls.get(MINE_KEY);if(m&&m.t)mine={t:m.t||{},a:m.a||{}};}
+const $=id=>document.getElementById(id);
+const clean=o=>{const t={},a={};for(const[k,v]of Object.entries(o.t||{}))if(W[k]&&SCORE[v])t[k]=v;for(const[k,v]of Object.entries(o.a||{}))if(W[v]&&AWARDS.some(x=>x.id===k))a[k]=v;return{t,a}};
+
+function el(tag,props={},kids=[]){const e=document.createElement(tag);for(const[k,v]of Object.entries(props)){if(k==="style")e.setAttribute("style",v);else if(k in e&&k!=="dataset")e[k]=v;else e.setAttribute(k,v)}for(const c of[].concat(kids))if(c!=null)e.append(c);return e}
+const sty=w=>`--c1:${w.c1};--c2:${w.c2};--img:url(img/${w.id}.jpg)`;
+function card(w,extra){const b=el("button",{className:"world",type:"button",draggable:true,title:w.name+": "+w.tag,style:sty(w)},[el("span",{className:"wn",textContent:w.name})]);b.dataset.id=w.id;if(w.side&&!extra)b.append(el("span",{className:"side",textContent:"side"}));if(extra)b.append(extra);
+  if(other&&!extra&&mine.t[w.id]&&other.t[w.id]===mine.t[w.id])b.append(el("span",{className:"match",title:"You both put this in "+mine.t[w.id]}));
+  return b}
+
+// ---------- rank view ----------
+function renderBoard(popId){
+  const board=$("board");board.textContent="";
+  document.body.classList.toggle("holding",!!held);
+  for(const t of TIERS){
+    const drop=el("div",{className:"drop"});drop.dataset.tier=t.k;
+    WORLDS.filter(w=>mine.t[w.id]===t.k).forEach(w=>drop.append(card(w)));
+    const lab=el("div",{className:"tlabel",title:"Drop here"},[el("b",{textContent:t.k}),el("span",{textContent:t.name}),el("small",{textContent:t.sub})]);lab.dataset.tier=t.k;
+    board.append(el("div",{className:"tier",style:`--tc:var(--${t.k})`},[lab,drop]));
+  }
+  const tray=$("tray");tray.textContent="";
+  const left=WORLDS.filter(w=>!mine.t[w.id]);
+  left.forEach(w=>tray.append(card(w)));
+  $("trayTitle").textContent=left.length?`Unranked worlds (${left.length})`:"Every world ranked. Nice.";
+  if(!left.length)tray.append(el("p",{className:"empty",textContent:"Tap any world above to move it."}));
+  document.querySelectorAll(".world").forEach(c=>{if(c.dataset.id===held)c.classList.add("held");if(c.dataset.id===popId)c.classList.add("pop")});
+  const h=$("hint");if(held){h.hidden=false;h.textContent=`Tap a tier for ${W[held].name}`}else h.hidden=true;
+}
+function place(id,tier){
+  const was=Object.keys(mine.t).length;
+  if(tier)mine.t[id]=tier;else delete mine.t[id];
+  held=null;renderBoard(id);queueSave();
+  const c=document.querySelector(`#view-rank .world[data-id="${id}"]`);
+  if(c&&tier){const r=c.getBoundingClientRect();sparkle(r.left+r.width/2,r.top+r.height/2,SCORE[tier]);chime(SCORE[tier]);
+    if(other&&other.t[id]===tier)setTimeout(()=>{toast(`${otherName()} put ${W[id].name} in ${tier} too`);chime(6,true)},350)}
+  if(tier&&was<WORLDS.length&&Object.keys(mine.t).length===WORLDS.length)setTimeout(()=>{toast("Every world ranked. Check Our lists.");chime(6,true);for(let k=0;k<6;k++)setTimeout(()=>sparkle(innerWidth*Math.random(),80+innerHeight*.3*Math.random(),6),k*120)},500);
+}
+// ---------- magic ----------
+const meColor=()=>iAmMathew?"#f5c451":"#8fe3ff";
+const otherName=()=>iAmMathew?"Yomna":"Mathew";
+const calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function sparkle(x,y,power=3){if(calm)return;const n=8+power*3;for(let i=0;i<n;i++){const p=el("i",{className:"spark"});const a=Math.random()*Math.PI*2,d=30+Math.random()*(30+power*12);
+  p.style.cssText=`left:${x}px;top:${y}px;--c:${i%3?meColor():"#fff"};--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px`;document.body.append(p);setTimeout(()=>p.remove(),850)}}
+function toast(t){const e=el("div",{className:"toast",textContent:t});document.body.append(e);setTimeout(()=>e.remove(),3300)}
+let soundOn=ls.get("stl-sound")!==false,ac=null;
+// Placement sound: a short, soft "tock" (a quick sine that settles down in pitch, plus a tiny filtered tick on top).
+// Same pitch every time so it never gets sing-songy; better tiers are only a touch brighter.
+let comp=null;
+function out(){if(!comp){comp=ac.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=4;const lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=5200;comp.connect(lp).connect(ac.destination)}return comp}
+function tock(t,f,v){
+  const o=ac.createOscillator(),g=ac.createGain();o.type="sine";
+  o.frequency.setValueAtTime(f*1.5,t);o.frequency.exponentialRampToValueAtTime(f,t+.035);
+  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.004);g.gain.exponentialRampToValueAtTime(0.0001,t+.16);
+  o.connect(g).connect(out());o.start(t);o.stop(t+.18);
+  const len=Math.floor(ac.sampleRate*.006),b=ac.createBuffer(1,len,ac.sampleRate),d=b.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+  const n=ac.createBufferSource(),bp=ac.createBiquadFilter(),ng=ac.createGain();bp.type="bandpass";bp.frequency.value=3800;bp.Q.value=1.2;ng.gain.value=v*.5;
+  n.buffer=b;n.connect(bp).connect(ng).connect(out());n.start(t);
+}
+function chime(score,duet){if(!soundOn)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();const t=ac.currentTime+.005;
+  if(duet){tock(t,660,.07);tock(t+.07,990,.06)}else tock(t,560+score*12,.11)}catch(e){}}
+function renderSound(){const b=$("soundBtn");b.setAttribute("aria-pressed",String(soundOn));b.textContent=soundOn?"Sound on":"Sound off"}
+$("soundBtn").onclick=()=>{soundOn=!soundOn;ls.set("stl-sound",soundOn);renderSound();if(soundOn)chime(4)};
+renderSound();
+document.addEventListener("click",e=>{
+  if(tab!=="rank")return;
+  const c=e.target.closest(".world");const zone=e.target.closest("[data-tier]");
+  if(c&&c.closest("#view-rank")){
+    const id=c.dataset.id,ct=c.closest("[data-tier]").dataset.tier;
+    if(held&&held!==id&&(mine.t[held]||"")!==ct){place(held,ct);return}
+    held=held===id?null:id;renderBoard();return;
+  }
+  if(held&&zone&&zone.closest("#view-rank")){place(held,zone.dataset.tier);return}
+  if(held&&!e.target.closest("button")){held=null;renderBoard()}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&held){held=null;renderBoard();return}
+  if(tab==="rank"&&held&&/^[sabcdfSABCDF0]$/.test(e.key)){place(held,e.key==="0"?"":e.key.toUpperCase())}
+});
+let dragId=null;
+document.addEventListener("dragstart",e=>{const c=e.target.closest&&e.target.closest(".world");if(!c)return;dragId=c.dataset.id;e.dataTransfer.setData("text/plain",dragId);e.dataTransfer.effectAllowed="move"});
+document.addEventListener("dragover",e=>{const z=e.target.closest&&e.target.closest("#view-rank [data-tier]");if(!z||!dragId)return;e.preventDefault();document.querySelectorAll(".over").forEach(x=>x.classList.remove("over"));(z.classList.contains("drop")?z:z.parentElement.querySelector(".drop")).classList.add("over")});
+document.addEventListener("drop",e=>{const z=e.target.closest&&e.target.closest("#view-rank [data-tier]");if(!z||!dragId)return;e.preventDefault();const id=dragId;dragId=null;place(id,z.dataset.tier)});
+document.addEventListener("dragend",()=>{dragId=null;document.querySelectorAll(".over").forEach(x=>x.classList.remove("over"))});
+
+let resetArmed=0;
+$("reset").onclick=()=>{
+  if(Date.now()-resetArmed>3000){resetArmed=Date.now();$("reset").textContent="Tap again to clear";setTimeout(()=>{$("reset").textContent="Clear my list"},3000);return}
+  mine={t:{},a:{}};held=null;resetArmed=0;$("reset").textContent="Clear my list";renderBoard();renderAwards();queueSave();
+};
+$("copyText").onclick=()=>{
+  const lines=["My Wizard101 world tier list"];
+  for(const t of TIERS){const ws=WORLDS.filter(w=>mine.t[w.id]===t.k).map(w=>w.name);if(ws.length)lines.push(`${t.k} (${t.name}): ${ws.join(", ")}`)}
+  const aw=AWARDS.filter(a=>mine.a[a.id]).map(a=>`${a.name}: ${W[mine.a[a.id]].name}`);if(aw.length)lines.push("",...aw);
+  copy(lines.join("\n"),$("copyText"),"Copied for Discord");
+};
+
+// ---------- awards ----------
+function renderAwards(){
+  const box=$("awards");box.textContent="";
+  for(const a of AWARDS){
+    const picks=el("div",{className:"picks"});
+    for(const w of WORLDS){const p=el("button",{className:"pick",type:"button",textContent:w.name,style:sty(w)});p.setAttribute("aria-pressed",mine.a[a.id]===w.id?"true":"false");
+      p.onclick=()=>{if(mine.a[a.id]===w.id)delete mine.a[a.id];else mine.a[a.id]=w.id;renderAwards();queueSave()};picks.append(p)}
+    const cur=mine.a[a.id]?W[mine.a[a.id]].name:"No pick yet";
+    box.append(el("div",{className:"award"},[el("header",{},[el("div",{},[el("h3",{textContent:a.name}),el("div",{className:"q",textContent:a.q})]),el("span",{className:"note",textContent:cur})]),picks]));
+  }
+}
+
+// ---------- saving ----------
+let saveTimer=null,saving=false,dirty=false;
+function setSave(msg){$("save1").textContent=msg;$("save2").textContent=msg}
+function queueSave(){
+  ls.set(MINE_KEY,mine);
+  clearTimeout(saveTimer);
+  if(!(db&&myId&&canWrite)){setSave("Saved on this device");renderUs();return}
+  setSave("Saving…");saveTimer=setTimeout(flush,700);renderUs();
+}
+async function flush(){
+  if(saving){dirty=true;return}
+  saving=true;
+  try{await db.doc("votes/"+myId).set({t:mine.t,a:mine.a,at:Date.now()});setSave("Saved")}
+  catch(e){if(e&&e.code==="invalid_argument"){canWrite=false;setSave("Saved on this device")}else setSave("Couldn't save just now. It will retry on your next change.")}
+  saving=false;if(dirty){dirty=false;flush()}
+}
+
+async function copy(text,btn,ok){
+  const old=btn.textContent;
+  try{await navigator.clipboard.writeText(text);btn.textContent=ok;setTimeout(()=>btn.textContent=old,1800)}
+  catch(e){const f=$("fallbackCopy");f.hidden=false;f.value=text;f.focus();f.select();btn.textContent="Select and copy below"}
+}
+
+// ---------- our lists ----------
+function applyWho(){
+  const r=document.documentElement.style;r.setProperty("--me",iAmMathew?"var(--gold)":"var(--ice)");r.setProperty("--them",iAmMathew?"var(--ice)":"var(--gold)");
+  $("wizMathew").classList.toggle("you",!!myId&&iAmMathew);$("wizYomna").classList.toggle("you",!!myId&&!iAmMathew);
+  $("waitImg").src=iAmMathew?"img/maria.jpg":"img/mathew.jpg";
+  $("waitTitle").textContent=`Waiting for ${otherName()}'s list`;
+  $("waitLine").textContent=`Once ${iAmMathew?"she":"he"} ranks a few worlds, your two lists line up here.`;
+}
+function pickOther(){
+  const cand=votes.filter(v=>v.id!==myId).map(v=>({...clean(v),at:v.at||0})).filter(v=>Object.keys(v.t).length||Object.keys(v.a).length).sort((a,b)=>b.at-a.at);
+  other=cand[0]||null;
+}
+const sideOf=isMe=>(isMe===iAmMathew)?"Mathew":"Yomna";
+function tb(k,isMe){const nm=sideOf(isMe);return el("span",{className:"tb"+(k?"":" none"),style:(k?`--tc:var(--${k});`:"")+`--who:var(${isMe?"--me":"--them"})`,textContent:k||"\u2013",title:k?`${nm}: ${k}`:`${nm} hasn't ranked it`})}
+function pairFor(id){const m=tb(mine.t[id],true),o=tb(other?other.t[id]:null,false);return el("span",{className:"pair"},iAmMathew?[m,o]:[o,m])}
+function vrow(w,right,cls=""){return el("div",{className:"vrow "+cls},[el("span",{className:"th",style:sty(w)}),el("strong",{textContent:w.name}),right])}
+const sum=(w)=>(SCORE[mine.t[w.id]]||0)+((other&&SCORE[other.t[w.id]])||0);
+function renderUs(){
+  if(tab!=="us")return;
+  const lg=$("legend");lg.textContent="";
+  lg.append(el("span",{style:"--who:var(--gold)"},[el("i"),"Mathew"]),el("span",{style:"--who:var(--ice)"},[el("i"),"Yomna"]));
+  $("waiting").hidden=!!(other&&Object.keys(other.t).length);
+  const both=other?WORLDS.filter(w=>mine.t[w.id]&&other.t[w.id]):[];
+  let pts=0;both.forEach(w=>{const d=Math.abs(SCORE[mine.t[w.id]]-SCORE[other.t[w.id]]);pts+=d===0?1:d===1?.5:0});
+  const pct=both.length?Math.round(100*pts/both.length):0;
+  $("dial").style.setProperty("--p",pct);$("syncPct").textContent=both.length?pct+"%":"\u2013";
+  const same=both.filter(w=>mine.t[w.id]===other.t[w.id]).length;
+  $("syncTitle").textContent=!both.length?"How in sync are you?":pct>=80?"Basically the same brain":pct>=60?"Strong duo energy":pct>=40?"Friendly rivals":"Opposite schools, clearly";
+  $("syncLine").textContent=both.length?`${same} of the ${both.length} worlds you've both ranked are in the exact same tier. One tier apart counts as half a match.`:"Rank some worlds, both of you, and your sync score shows up here.";
+  const love=$("bothLove");love.textContent="";
+  const L=both.filter(w=>SCORE[mine.t[w.id]]>=5&&SCORE[other.t[w.id]]>=5).sort((a,b)=>sum(b)-sum(a));
+  L.forEach(w=>love.append(vrow(w,pairFor(w.id))));if(!L.length)love.append(el("p",{className:"empty",textContent:"Nothing yet. Find a world you both adore."}));
+  const deb=$("debate");deb.textContent="";
+  const Dl=both.map(w=>({w,d:Math.abs(SCORE[mine.t[w.id]]-SCORE[other.t[w.id]])})).filter(x=>x.d>=2).sort((a,b)=>b.d-a.d);
+  Dl.forEach(x=>deb.append(vrow(x.w,pairFor(x.w.id))));if(!Dl.length)deb.append(el("p",{className:"empty",textContent:"No big fights. Suspiciously peaceful."}));
+  const ap=$("awardPair");ap.textContent="";
+  for(const a of AWARDS){const mw=mine.a[a.id],ow=other&&other.a[a.id];const sameA=!!mw&&mw===ow;
+    const nm=x=>x?W[x].name:"no pick";const mt=iAmMathew?nm(mw):nm(ow),yt=iAmMathew?nm(ow):nm(mw);
+    ap.append(el("div",{className:"vrow text"+(sameA?" same":"")},[el("div",{},[el("strong",{textContent:a.name}),el("div",{className:"note",textContent:`Mathew: ${mt} \u00b7 Yomna: ${yt}`})])]))}
+  const fl=$("fullList");fl.textContent="";
+  WORLDS.filter(w=>mine.t[w.id]||(other&&other.t[w.id])).sort((a,b)=>sum(b)-sum(a))
+    .forEach(w=>fl.append(vrow(w,pairFor(w.id),other&&mine.t[w.id]&&mine.t[w.id]===other.t[w.id]?"same":"")));
+  if(!fl.children.length)fl.append(el("p",{className:"empty",textContent:"No worlds ranked yet."}));
+}
+
+// ---------- tabs ----------
+function setTab(t){tab=t;held=null;
+  document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+  for(const v of["rank","awards","us"])$("view-"+v).hidden=v!==t;
+  try{sessionStorage.setItem("stl-tab",t)}catch(e){}
+  renderBoard();if(t==="us")renderUs();
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+
+// ---------- sky ----------
+(function(){const cv=$("sky"),cx=cv.getContext("2d");let stars=[];const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ function size(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;stars=[];const n=Math.round(innerWidth*innerHeight/5000);
+  for(let i=0;i<n;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6});draw(0)}
+ function draw(t){const w=cv.width,h=cv.height,d=devicePixelRatio;cx.clearRect(0,0,w,h);
+  const g=cx.createRadialGradient(w*.85,h*.05,0,w*.85,h*.05,w*.7);g.addColorStop(0,"rgba(120,80,220,.28)");g.addColorStop(1,"rgba(0,0,0,0)");cx.fillStyle=g;cx.fillRect(0,0,w,h);
+  // the Spiral
+  cx.save();cx.translate(w*.88,h*.1);cx.strokeStyle="rgba(245,196,81,.10)";cx.lineWidth=1.5*d;cx.beginPath();
+  for(let a=0;a<26;a+=.05){const r=4*d*Math.exp(.17*a);const x=Math.cos(a+t/9000)*r,y=Math.sin(a+t/9000)*r;a?cx.lineTo(x,y):cx.moveTo(x,y)}cx.stroke();cx.restore();
+  for(const s of stars){cx.globalAlpha=.35+.35*Math.sin(s.p+t/900);cx.fillStyle="#fff";cx.beginPath();cx.arc(s.x*w,s.y*h,s.r*d,0,7);cx.fill()}cx.globalAlpha=1;
+  if(!still)requestAnimationFrame(draw)}
+ addEventListener("resize",size);size();})();
+
+// ---------- boot ----------
+try{const t=sessionStorage.getItem("stl-tab");if(t==="rank"||t==="awards"||t==="us")tab=t}catch(e){}
+applyWho();setTab(tab);renderAwards();setSave("Saved on this device");
+// Hosted on Yomna's page (no logins): picks save on this device. Mathew's list is built in, so "Our lists" works for her right away.
+// "Send my picks to Mathew" makes a link that carries her list; when he opens it, her picks show up on his side. (?me=mathew = his view.)
+const MATHEW_LIST={"t": {"aq": "C", "av": "A", "az": "C", "ce": "B", "dm": "S", "ds": "A", "em": "C", "gh": "C", "ka": "A", "kh": "B", "kt": "S", "le": "F", "mb": "S", "mi": "A", "ms": "B", "no": "C", "po": "S", "se": "B", "wa": "F", "wc": "A", "ws": "D", "za": "D"}, "a": {"story": "wc"}};
+(function(){
+  const q=new URLSearchParams(location.search), h=new URLSearchParams(location.hash.slice(1));
+  const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,""), dec=x=>{try{return clean(JSON.parse(decodeURIComponent(escape(atob(x)))))}catch(e){return null}};
+  iAmMathew=q.get("me")==="mathew"||(h.get("y")!=null&&q.get("me")!=="yomna");
+  myId="local";
+  if(iAmMathew){   // Mathew: his own list lives on his device; Yomna's comes from the link she sent (and is remembered)
+    const y=h.get("y")?dec(h.get("y")):null; if(y){ls.set("stl-yomna",y);}
+    const saved=ls.get("stl-yomna"); other=saved?clean(saved):null;
+    if(!Object.keys(mine.t).length&&!Object.keys(mine.a).length)mine=clean(MATHEW_LIST);
+    if(y)setTimeout(()=>{toast("Yomna's picks are in. Check Our lists.");chime(6,true)},600);
+  }else other=clean(MATHEW_LIST);
+  applyWho();
+  $("who").textContent=iAmMathew?"Ranking as Mathew Gold Eyes":"Ranking as Maria (Yomna)";
+  $("sendBtn").hidden=iAmMathew;
+  $("sendBtn").onclick=()=>{
+    if(!Object.keys(mine.t).length&&!Object.keys(mine.a).length){toast("Rank a few worlds first");return}
+    const url=location.origin+location.pathname+"?me=mathew#y="+enc(mine);
+    if(navigator.share){navigator.share({title:"My Wizard101 tier list",text:"My tier list picks ✨",url}).catch(()=>copy(url,$("sendBtn"),"Link copied. Send it to Mathew"))}
+    else copy(url,$("sendBtn"),"Link copied. Send it to Mathew");
+  };
+  renderBoard();renderAwards();renderUs();
+})();
+</script>
+
+</body></html>

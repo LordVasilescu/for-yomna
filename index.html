@@ -101,6 +101,8 @@
   .hud .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
   .hud .modes{display:flex;gap:4px}
   .hud .ghost{border:0;padding:7px 12px;font-size:.88rem}
+  .hud .tl-link{text-decoration:none;color:var(--gold);border:2px solid var(--gold);margin-left:auto}
+  .hud .tl-link:hover{background:var(--card2)}
 
   /* ---------- title screen ---------- */
   .title{position:relative;margin-top:16px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--frame)}
@@ -786,6 +788,12 @@
   .mv-item .new{display:inline-block;margin-right:6px;padding:0 6px;border-radius:999px;background:#E0525E;color:#fff;font-family:"Fredoka",sans-serif;font-size:.6rem;letter-spacing:.1em;vertical-align:2px}
   .mv-item.seen .new{display:none}
   .mv-item .cs-item-card p{font-family:"Fredoka",sans-serif;font-size:.82rem;line-height:1.35;color:#ffe9ec;margin:4px 0 0}
+  .tl-item{z-index:54;bottom:calc(172px + env(safe-area-inset-bottom,0px))}
+  .cs-item[hidden]+.mv-item+.tl-item{bottom:calc(94px + env(safe-area-inset-bottom,0px))}
+  .tl-item .cs-item-btn{background:radial-gradient(circle at 40% 35%,#2a6a8a,#0c2440)}
+  .tl-item .cs-item-tag{background:linear-gradient(90deg,rgba(12,36,64,.95),rgba(30,80,110,.92))}
+  .tl-item .new{display:inline-block;margin-right:6px;padding:0 6px;border-radius:999px;background:#3fb8d8;color:#fff;font-family:"Fredoka",sans-serif;font-size:.6rem;letter-spacing:.1em;vertical-align:2px}
+  .tl-item.seen .new{display:none}
   @media (prefers-reduced-motion:reduce){.cs-item-btn,.cs-item-btn img,.cs-mail-ic,.cs-mail .btn,.cs-next{animation:none}}
 </style>
 
@@ -845,11 +853,17 @@
   <button class="cs-item-btn" type="button" aria-label="Movie Night tickets, tap to open"><img alt="" src="img/mn_tkicon.png"><span aria-hidden="true">&#127903;</span></button>
   <button class="cs-item-tag" type="button" tabindex="-1" aria-hidden="true"><b><span class="new">NEW</span>Movie Night</b><small>tap to open</small></button>
 </div>
+<a class="cs-item tl-item" id="tl-item" href="tierlist/">
+  <span class="cs-item-btn" aria-label="Our Wizard101 tier list"><span aria-hidden="true">&#127942;</span></span>
+  <span class="cs-item-tag"><b><span class="new">NEW</span>Wizard101 tier list</b><small>make your picks</small></span>
+</a>
+<script>(function(){var it=document.getElementById('tl-item');try{if(localStorage.getItem('yomna-tl')==='1')it.classList.add('seen');else it.classList.add('pop');}catch(e){}it.addEventListener('click',function(){try{localStorage.setItem('yomna-tl','1');}catch(e){}});})();</script>
 <canvas id="stars"></canvas>
 <div class="wrap">
 
   <div class="hud">
     <span class="who"><img src="img/maria_chibi.jpg" alt="">Maria · Ice ❄<span class="pipwrap"> · <span class="pips" aria-label="pips"><i class="pip"></i><i class="pip"></i><i class="pip power"></i></span></span></span>
+    <a class="ghost tl-link" href="tierlist/">✦ Our Wizard101 tier list</a>
     <div class="modes" role="group" aria-label="Day or night">
       <button class="ghost" type="button" id="mode-night">☾ night</button>
       <button class="ghost" type="button" id="mode-day">☼ day</button>
