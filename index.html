@@ -794,7 +794,30 @@
   .tl-item .cs-item-tag{background:linear-gradient(90deg,rgba(12,36,64,.95),rgba(30,80,110,.92))}
   .tl-item .new{display:inline-block;margin-right:6px;padding:0 6px;border-radius:999px;background:#3fb8d8;color:#fff;font-family:"Fredoka",sans-serif;font-size:.6rem;letter-spacing:.1em;vertical-align:2px}
   .tl-item.seen .new{display:none}
+  .sh-item{z-index:53;bottom:calc(250px + env(safe-area-inset-bottom,0px))}   /* الشهادة: Mathew's gift (© 2026 Mathew) */
+  .cs-item[hidden]+.mv-item+.tl-item+.sh-item{bottom:calc(172px + env(safe-area-inset-bottom,0px))}
+  .sh-item .cs-item-btn{background:radial-gradient(circle at 40% 35%,#6a2da2,#22093e)}
+  .sh-item .cs-item-btn svg{width:58%;height:58%}
+  .sh-item .cs-item-tag{background:linear-gradient(90deg,rgba(34,9,62,.95),rgba(90,36,140,.92))}
+  .sh-item .cs-item-tag b{font-family:Amiri,serif;font-weight:700;font-size:1.05rem;letter-spacing:0}
+  .sh-item .new{display:inline-block;margin-right:6px;padding:0 6px;border-radius:999px;background:#b06ee0;color:#fff;font-family:"Fredoka",sans-serif;font-size:.6rem;letter-spacing:.1em;vertical-align:3px}
+  .sh-item.seen .new{display:none}
+  .sh-item.beacon .cs-item-btn{width:78px;height:78px;margin:-7px 0 0 -7px;animation:shbeat 1.5s ease-in-out infinite;box-shadow:0 0 0 3px #F2C46D,0 0 0 6px #6B4F1C,0 0 34px rgba(176,110,224,.9)}
+  .sh-item.beacon .cs-item-btn::before,.sh-item.beacon .cs-item-btn::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:3px solid rgba(196,138,232,.9);animation:shring 2s ease-out infinite;pointer-events:none}
+  .sh-item.beacon .cs-item-btn::after{animation-delay:1s}
+  .sh-item.beacon .cs-item-btn{position:relative}
+  .sh-item.beacon .cs-item-tag{left:80px;box-shadow:0 0 0 2px #F2C46D,0 0 22px rgba(176,110,224,.7)}
+  .sh-call{display:none;position:absolute;left:-4px;bottom:92px;width:max-content;max-width:min(300px,calc(100vw - 32px));padding:10px 16px 11px;border-radius:16px;background:linear-gradient(180deg,#5a2490,#2a0b4c);box-shadow:0 0 0 2px #F2C46D,0 0 0 5px #6B4F1C,0 0 34px rgba(176,110,224,.8);color:#fff;text-align:center;animation:shbob 2.2s ease-in-out infinite;pointer-events:none}
+  .sh-call b{display:block;font-family:"Lilita One",sans-serif;font-weight:400;font-size:1.02rem;color:#F2C46D;letter-spacing:.02em}
+  .sh-call small{display:block;font-family:"Fredoka",sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#f0dcff;margin-top:3px}
+  .sh-call::after{content:"";position:absolute;left:30px;bottom:-11px;border:11px solid transparent;border-bottom:0;border-top-color:#2a0b4c;filter:drop-shadow(0 2px 0 #F2C46D)}
+  .sh-item.beacon .sh-call{display:block}
+  @keyframes shbeat{50%{transform:scale(1.08)}}
+  @keyframes shring{0%{transform:scale(1);opacity:1}100%{transform:scale(1.9);opacity:0}}
+  @keyframes shbob{50%{transform:translateY(-6px)}}
+  @media (prefers-reduced-motion:reduce){.sh-item.beacon .cs-item-btn,.sh-call,.sh-item.beacon .cs-item-btn::before,.sh-item.beacon .cs-item-btn::after{animation:none}}
   @media (prefers-reduced-motion:reduce){.cs-item-btn,.cs-item-btn img,.cs-mail-ic,.cs-mail .btn,.cs-next{animation:none}}
+
 </style>
 
 <div class="letter-veil sorry" id="sorry" hidden role="dialog" aria-modal="true" aria-label="A letter from Mathew">
@@ -858,6 +881,12 @@
   <span class="cs-item-tag"><b><span class="new">NEW</span>Wizard101 tier list</b><small>make your picks</small></span>
 </a>
 <script>(function(){var it=document.getElementById('tl-item');try{if(localStorage.getItem('yomna-tl')==='1')it.classList.add('seen');else it.classList.add('pop');}catch(e){}it.addEventListener('click',function(){try{localStorage.setItem('yomna-tl','1');}catch(e){}});})();</script>
+<a class="cs-item sh-item" id="sh-item" href="shahada/">
+  <span class="cs-item-btn" aria-label="الشهادة"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M25 7.5A13 13 0 1 0 25 32.5A10.4 10.4 0 1 1 25 7.5Z" fill="#F2C46D"/><path d="M29 14.5l1.2 2.6 2.8.3-2.1 1.9.6 2.8-2.5-1.4-2.5 1.4.6-2.8-2.1-1.9 2.8-.3z" fill="#FFE29A"/></svg></span>
+  <span class="cs-item-tag"><b><span class="new">NEW</span>الشهادة</b><small>a gift from mathew</small></span>
+  <span class="sh-call"><b>✦ Mathew made something for you</b><small>tap here · watch it all the way through</small></span>
+</a>
+<script>(function(){var it=document.getElementById('sh-item');try{if(localStorage.getItem('yomna-shahada')==='1')it.classList.add('seen');else it.classList.add('pop','beacon');}catch(e){}it.addEventListener('click',function(){try{localStorage.setItem('yomna-shahada','1');}catch(e){}});})();</script>
 <canvas id="stars"></canvas>
 <div class="wrap">
 
@@ -1840,3 +1869,4 @@
     setTimeout(function(){if(!window.YCS&&!cs.hidden)window.YSorryFallback();},45000);}
 })();
 </script>
+

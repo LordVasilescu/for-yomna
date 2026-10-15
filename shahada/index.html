@@ -1,0 +1,85 @@
+<!doctype html>
+<!-- الشهادة · a pixel-art Shahada for Yomna · © 2026 Mathew. All rights reserved. -->
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12052a">
+<meta name="author" content="Mathew">
+<title>الشهادة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=block" rel="stylesheet">
+<style>
+:root { --gold: #ffd75e; --ink: #f6ecff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #12052a; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+#cv, #cvT { position: fixed; left: 0; top: 0; image-rendering: pixelated; image-rendering: crisp-edges; display: block; touch-action: none; }
+#cvT { pointer-events: none; }
+.ov { position: fixed; left: 0; right: 0; bottom: max(2.6vh, 14px); text-align: center; pointer-events: none; color: var(--ink); transition: opacity 2s ease; opacity: 0; padding: 0 16px; text-shadow: 0 1px 10px #0a0118, 0 0 3px #0a0118; }
+.ov.on { opacity: 1; }
+#mean { font: italic 500 clamp(16px, 2.7vh, 26px)/1.45 'Cormorant Garamond', serif; }
+#mean b, #names b { display: block; font: 500 clamp(11px, 1.6vh, 15px)/1.7 'Cormorant Garamond', serif; letter-spacing: .22em; text-transform: uppercase; color: #e0b8ff; font-style: normal; }
+#msg { font: italic 500 clamp(16px, 2.5vh, 24px)/1.5 'Cormorant Garamond', serif; }
+#msg .ar, #names .ar { display: block; font: 700 clamp(20px, 3.2vh, 32px)/1.5 'Amiri', serif; color: var(--gold); font-style: normal; direction: rtl; text-shadow: 0 0 14px #b06ee099, 0 1px 6px #0a0118; }
+#names { font: italic 500 clamp(15px, 2.3vh, 22px)/1.45 'Cormorant Garamond', serif; transition: opacity 1.1s ease; }
+#start { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: radial-gradient(ellipse at 50% 45%, #3a1270 0%, #12052a 72%); transition: opacity 1.8s ease; z-index: 5; }
+#start.gone { opacity: 0; pointer-events: none; }
+#start button { all: unset; cursor: pointer; font: 700 clamp(32px, 6.5vh, 50px)/1.3 'Amiri', serif; color: var(--gold); padding: 14px 38px; border: 1px solid #b8862e; border-radius: 999px; text-shadow: 0 0 18px #ffb84a88; box-shadow: 0 0 34px #b06ee044, inset 0 0 18px #ffb84a18; direction: rtl; animation: breathe 3.2s ease-in-out infinite; }
+@keyframes breathe { 50% { box-shadow: 0 0 52px #b06ee077, inset 0 0 24px #ffb84a28; } }
+#start .hint { margin-top: 10px; text-align: center; color: #e0c8ff; font: italic 500 15px/1.6 "Cormorant Garamond", serif; letter-spacing: .04em; }
+#start .hint span { display: block; font: 700 19px/1.5 "Amiri", serif; color: #f3d98a; font-style: normal; direction: rtl; letter-spacing: 0; }
+#start p { margin: 0; color: #b9a6dc; font: italic 500 16px 'Cormorant Garamond', serif; letter-spacing: .08em; }
+.ui { all: unset; position: fixed; top: max(10px, env(safe-area-inset-top)); width: 34px; height: 34px; display: grid; place-items: center; cursor: pointer; color: #f3d98a; background: #1a0632cc; border: 1px solid #b8862e88; border-radius: 50%; z-index: 4; opacity: .55; transition: opacity .6s, transform .2s; }
+.ui:hover { opacity: 1; transform: scale(1.06); }
+.ui svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#fs { right: 12px; } #again { right: 54px; opacity: 0; pointer-events: none; } #again.on { opacity: .55; pointer-events: auto; }
+body.idle .ui, body.lettering .ui { opacity: 0 !important; pointer-events: none; }
+#home { position: fixed; left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); z-index: 6; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border-radius: 999px; background: #1a0632e6; border: 1px solid #b8862e; color: #f3d98a; text-decoration: none; font: 600 13px/1 "Cormorant Garamond", serif; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 18px #8c44c455; opacity: .7; transition: opacity .6s, box-shadow .6s; }
+#home:hover { opacity: 1; }
+#home svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+body.lettering #home { opacity: 0; pointer-events: none; }
+body.after #home { opacity: 1; box-shadow: 0 0 26px #b06ee088; }
+#letter { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 18px; background: radial-gradient(ellipse at 50% 50%, #12032acc 0%, #0a0118ee 75%); opacity: 0; pointer-events: none; transition: opacity 2.2s ease; z-index: 3; }
+#letter.on { opacity: 1; pointer-events: auto; }
+#letter .card { position: relative; scroll-behavior: smooth; max-width: 680px; width: 100%; max-height: 94vh; overflow-y: auto; scrollbar-width: none; padding: clamp(18px, 4vh, 38px) clamp(18px, 5vw, 44px); text-align: center; background: linear-gradient(180deg, #2a0b4cee, #1a0632f0); border: 1px solid #e0a428; box-shadow: 0 0 0 4px #1a0632, 0 0 0 5px #9a5a10, 0 0 60px #8c44c455; border-radius: 6px; }
+#letter .card::before { content: '۞'; display: block; color: var(--gold); font: 700 24px 'Amiri', serif; margin-bottom: 6px; text-shadow: 0 0 12px #b06ee0; }
+#letter .card::-webkit-scrollbar { display: none; }
+#letter .ln { opacity: 0; transform: translateY(6px); transition: opacity 1.4s ease, transform 1.4s ease; margin: 0 0 clamp(5px, 1.3vh, 14px); }
+#letter .ln.on { opacity: 1; transform: none; }
+#letter .ar { display: block; direction: rtl; font: 700 clamp(15px, min(3vh, 4.4vw), 27px)/1.5 'Amiri', serif; color: var(--gold); text-shadow: 0 0 10px #8c44c488; }
+#letter .en { display: block; font: italic 500 clamp(13px, min(2.3vh, 3.7vw), 20px)/1.38 'Cormorant Garamond', serif; color: #f6ecff; }
+#letter .sig { margin-top: 6px; } #letter .sig .ar { font-size: clamp(17px, 2.6vh, 23px); } #letter .sig .en { letter-spacing: .14em; font-style: normal; text-transform: uppercase; font-size: 13px; color: #e0b8ff; }
+#lclose { all: unset; cursor: pointer; display: inline-block; margin-top: 10px; padding: 8px 26px; border: 1px solid #b8862e; border-radius: 999px; color: var(--gold); font: 700 20px 'Amiri', serif; opacity: 0; transition: opacity 1.4s; pointer-events: none; }
+#lclose.on { opacity: 1; pointer-events: auto; }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<canvas id="cvT"></canvas>
+<div id="mean" class="ov"><b>The Shahada</b>There is no god but Allah, and Muhammad is the Messenger of Allah.</div>
+<div id="msg" class="ov"><span class="ar">أمنيتكِ عادت إليكِ</span>Your wish found its way back to you.</div>
+<div id="names" class="ov"><b id="nLab">The Beautiful Names of Allah</b><span class="ar" id="nAr"></span><span id="nEn"></span></div>
+<div id="letter"><div class="card">
+  <p class="ln"><span class="ar">منذ عشر سنوات وأنا أريد أن أكون مسلمًا، لكنني كنتُ أخاف من ردّة فعل عائلتي.</span><span class="en">For ten years I have wanted to be Muslim. I was afraid of how my family would treat me.</span></p>
+  <p class="ln"><span class="ar">والآن أُخبرهم: أؤمن بالله الواحد الأحد، وأن محمدًا ﷺ رسول الله وخاتم النبيين.</span><span class="en">Now I am telling them: I believe in Allah, the One True God, and that Muhammad ﷺ is His final messenger.</span></p>
+  <p class="ln"><span class="ar">بدأتُ أتعلّم الصلاة في ١٣ أكتوبر، ونطقتُ بالشهادتين في ١٥ أكتوبر. الحمد لله.</span><span class="en">I started learning to pray on October 13th. On October 15th, I said my Shahada. Alhamdulillah.</span></p>
+  <p class="ln"><span class="ar">لقد أخطأتُ، وها أنا أعود إلى الله الذي أعطاني كل شيء.</span><span class="en">I have made mistakes. Now I am turning back to Allah, who has given me everything.</span></p>
+  <p class="ln"><span class="ar">أنتِ ألهمتِني هذا. قبلكِ، كنتُ أظن أن ما عندي يكفيني. واليوم يعلّمني الله معنى الحب، وأنا أُصغي.</span><span class="en">You inspired this. Before you, I thought what I had was enough. Allah is teaching me love, and I am listening.</span></p>
+  <p class="ln"><span class="ar">ليست عليّ أي ديون مالية. وسأنتقل إلى كاليفورنيا لأعمل بجد، حتى أكون مستعدًا لأن أبني حياةً وأتكفّل بكل شيء، بعون الله، إن شاء الله.</span><span class="en">I have no financial debts. I am moving to California to work hard, so I am ready to build a life and provide for everything, with Allah’s help, in sha Allah.</span></p>
+  <p class="ln"><span class="ar">سأدعو عائلتي إلى الإسلام بالمحبة، لا بالإجبار، وإن شاء الله سيعتنقونه هم أيضًا.</span><span class="en">I will guide my family to Islam with love, never by force. In sha Allah, they will embrace it too.</span></p>
+  <p class="ln"><span class="ar">سأظل أمنحكِ أجزاءً من قلبي، أما أن تأخذيها أو لا، فذلك قراركِ.</span><span class="en">I will keep giving you pieces of my heart. Whether you take them is your choice.</span></p>
+  <p class="ln"><span class="ar">وإن كتب الله أن نكون معًا، فلن أفارقكِ أبدًا، كما في ويزارد ١٠١ وبالوورلد.</span><span class="en">If Allah writes us together, I will never leave your side, like in Wizard101 and Palworld.</span></p>
+  <p class="ln"><span class="ar">علّميني ثقافتكِ، ولغتكِ، وحياتكِ. وبعد الله، أنتِ أهم أهدافي.</span><span class="en">Teach me your culture, your language, your life. After Allah, you are my main goal.</span></p>
+  <p class="ln"><span class="ar">يُمنى، انتظريني. أريد أن أفعل هذا بالطريقة الصحيحة، كما يحب الله.</span><span class="en">Yomna, wait for me. I want to do this the right way, the way Allah loves.</span></p>
+  <p class="ln"><span class="ar">دعوتُ الله لأول مرة من أجلنا، وسأواظب على هذا الدعاء كل يوم. وأؤمن بأنه سيجمعنا بالحلال، في الوقت الذي يختاره.</span><span class="en">I made my first dua for us, and I will keep making it, every day, without fail. I believe Allah will bring us together the halal way, in His perfect time.</span></p>
+  <p class="ln"><span class="ar">وحتى ذلك اليوم، سأظل أتعلّم وأصبح أفضل، وسأبقى بجانبكِ. وإن شاء الله، أمنيتنا في طريقها إلينا.</span><span class="en">Until that day, I will keep growing, keep learning, and keep showing up for you. In sha Allah, our wish is already on its way.</span></p>
+  <p class="ln sig"><span class="ar">ماثيو</span><span class="en">Mathew</span></p>
+  <button id="lclose">♡</button>
+</div></div>
+<div id="start"><button id="go">بسم الله</button><p>tap to begin</p><p class="hint"><span>شاهديها حتى النهاية ♡</span>please watch it all the way through</p></div>
+<a id="home" href="../?from=shahada"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5"/><path d="M6.5 10v9h11v-9"/></svg>Back to your page</a>
+<button id="again" class="ui" title="Watch again" aria-label="Watch again"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></svg></button>
+<button id="fs" class="ui" title="Fullscreen" aria-label="Fullscreen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+<script src="shahada.js"></script>
+</body>
+</html>
